@@ -1,2 +1,2 @@
 # rfmtopfdd
-Code for the case 1 in the paper
+Code for some cases in the paper
