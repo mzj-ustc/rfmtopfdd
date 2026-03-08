@@ -474,12 +474,12 @@ def compute_compliance(xPhys, nelx, nely, nelz, E0=1000.0, Emin=1e-9, nu=0.3):
     for i in range(24): edofMat[:,i]=edofVec+3*offset_node[i//3]+(i%3)
     iK=np.repeat(edofMat,24,axis=1).flatten(); jK=np.repeat(edofMat,24,axis=0).flatten()
     xf=xPhys.flatten(order='F')
-    sK=(KE.ravel()[np.newaxis,:]*(Emin+xf**1*(E0-Emin))[:,np.newaxis]).ravel()
+    sK=(KE.ravel()[np.newaxis,:]*(Emin+xf**3*(E0-Emin))[:,np.newaxis]).ravel()
     K=sparse.coo_matrix((sK,(iK,jK)),shape=(ndof,ndof)).tocsr(); K=(K+K.T)*0.5
     U=np.zeros(ndof)
     U[freedofs]=spsolve(K[np.ix_(freedofs,freedofs)],F[freedofs].toarray().ravel())
     Ue=U[edofMat]; ce=np.sum((Ue@KE)*Ue,axis=1)
-    return np.sum((Emin+xf*(E0-Emin))*ce)
+    return np.sum((Emin+xf**3*(E0-Emin))*ce)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
