@@ -488,7 +488,7 @@ def compute_compliance(xPhys, nelx, nely, nelz, E0=1000.0, Emin=1e-9, nu=0.3):
 TOTAL_PARAMS_TARGET = 9600
 
 # blocks: (n_cols, n_rows, n_depths=1)
-block_configs = [(2,2,1), (3,3,1), (4,4,1)]
+block_configs = [(2,2,2), (3,3,3), (4,4,4)]
 
 # For each config, compute M such that total params ≈ TOTAL_PARAMS_TARGET
 # TO_BlockNet params: B*(3*M + M + 1) = B*(4M+1)
